@@ -1,19 +1,29 @@
 {
-    "clients": [
-        {
-            "id": 1,
-            "name": "Felipe",
-            "email": "felipe@gmail.com"
-        },
-        {
-            "id": 2,
-            "name": "Margarete",
-            "email": "margarete@gmail.com"
-        },
-        {
-            "id": 3,
-            "name": "Nelson da Saúde",
-            "email": "nelson@gmail.com"
-        }
-    ]
+  "clients": [
+    {
+      "id": 1,
+      "name": "Felipe",
+      "email": "Felipe@gmail.com"
+    },
+    {
+      "id": 2,
+      "name": "Margarete",
+      "email": "margarete@gmail.com"
+    },
+    {
+      "id": 3,
+      "name": "Nelson da Saúde",
+      "email": "nelson@gmail.com"
+    },
+    {
+      "id": 4,
+      "name": "Felipe",
+      "email": "aaaaaaaaaaa@gmila"
+    },
+    {
+      "id": 5,
+      "name": "Masculino",
+      "email": "mdo@example.comewqeqweqewq"
+    }
+  ]
 }
