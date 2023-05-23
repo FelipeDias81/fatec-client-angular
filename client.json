@@ -24,6 +24,11 @@
       "id": 5,
       "name": "Masculino",
       "email": "mdo@example.comewqeqweqewq"
+    },
+    {
+      "id": 6,
+      "name": "Felipe Dias da Silveira",
+      "email": "felipedias501@gmail.com"
     }
   ]
 }

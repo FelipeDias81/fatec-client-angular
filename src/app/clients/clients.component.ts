@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientService } from '../client.service';
 import { Client } from '../client';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-clients',
@@ -12,13 +12,14 @@ export class ClientsComponent implements OnInit {
   clients: Client[] = [];
   isEditing: boolean = false;
   formGroupClient: FormGroup;
+  submitted: boolean = false;
 
   constructor(private clientService: ClientService,
     private formBuilder: FormBuilder) {
     this.formGroupClient = formBuilder.group({
       id: [''],
-      name: [''],
-      email: ['']
+      name: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]]
     });
   }
 
@@ -35,28 +36,35 @@ export class ClientsComponent implements OnInit {
   }
 
   save() {
-    if (this.isEditing) {
-      this.clientService.update(this.formGroupClient.value).subscribe({
-        next: () => {
-          this.loadClients()
-          this.formGroupClient.reset()
-          this.isEditing = false
-        }
-      })
-    }
-    else {
-      this.clientService.save(this.formGroupClient.value).subscribe({
-        next: data => {
-          this.clients.push(data);
-          this.formGroupClient.reset();
-        }
-      });
+    this.submitted = true;
+
+    if (this.formGroupClient.valid) {
+      if (this.isEditing) {
+        this.clientService.update(this.formGroupClient.value).subscribe({
+          next: () => {
+            this.loadClients();
+            this.formGroupClient.reset();
+            this.isEditing = false;
+            this.submitted = false;
+          }
+        })
+      }
+      else {
+        this.clientService.save(this.formGroupClient.value).subscribe({
+          next: data => {
+            this.clients.push(data);
+            this.formGroupClient.reset();
+            this.submitted = false;
+          }
+        });
+      }
     }
   }
 
-  clear(){
+  clear() {
     this.formGroupClient.reset();
     this.isEditing = false;
+    this.submitted = false;
   }
 
   edit(client: Client) {
@@ -71,5 +79,12 @@ export class ClientsComponent implements OnInit {
     this.clientService.delete(client).subscribe({
       next: () => this.loadClients()
     })
+  }
+
+  get name(): any {
+    return this.formGroupClient.get("name");
+  }
+  get email(): any {
+    return this.formGroupClient.get("email");
   }
 }
