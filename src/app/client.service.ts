@@ -10,15 +10,19 @@ export class ClientService {
   url = "http://localhost:3000/clients";
   constructor(private http: HttpClient) { }
 
-  getClient(): Observable<Client[]> {
+  getClients(): Observable<Client[]> {
     return this.http.get<Client[]>(this.url);
+  }
+
+  getClient(id: number): Observable<Client[]> {
+    return this.http.get<Client[]>(`${this.url}/${id}`);
   }
 
   save(client: Client): Observable<Client> {
     return this.http.post<Client>(this.url, client);
   }
 
-  update(client: Client): Observable<Client>{
+  update(client: Client): Observable<Client> {
     return this.http.put<Client>(`${this.url}/${client.id}`, client);
   }
 

@@ -28,7 +28,7 @@ export class ClientsComponent implements OnInit {
   }
 
   loadClients() {
-    this.clientService.getClient().subscribe(
+    this.clientService.getClients().subscribe(
       {
         next: data => this.clients = data
       }
